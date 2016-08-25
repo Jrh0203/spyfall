@@ -61,11 +61,12 @@ Meteor.publish('games', function(accessCode) {
 Meteor.publish('players', function(gameID) {
   return Players.find({"gameID": gameID});
 });
-
+//****
 Games.find({"state": 'settingUp'}).observeChanges({
   added: function (id, game) {
     var location = getRandomLocation();
     var players = Players.find({gameID: id});
+    //window.alert(players);
     var gameEndTime = moment().add(game.lengthInMinutes, 'minutes').valueOf();
 
     var spyIndex = Math.floor(Math.random() * players.count());

@@ -95,12 +95,11 @@ function getCurrentPlayer(){
     return Players.findOne(playerID);
   }
 }
-
 function generateAccessCode(){
   var code = "";
   var possible = "abcdefghijklmnopqrstuvwxyz";
 
-    for(var i=0; i < 6; i++){
+    for(var i=0; i < 2; i++){
       code += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
@@ -112,7 +111,7 @@ function generateNewGame(){
     accessCode: generateAccessCode(),
     state: "waitingForPlayers",
     location: null,
-    lengthInMinutes: 8,
+    lengthInMinutes: 10,
     endTime: null,
     paused: false,
     pausedTime: null
@@ -130,6 +129,16 @@ function generateNewPlayer(game, name){
     name: name,
     role: null,
     isSpy: false,
+    isMordred: false,
+    isMorgana: false,
+    isMerlin: false,
+    isPercival: false,
+    isGoodLancelot: false,
+    isBadLancelot: false,
+    isEvil: false,
+    isGood: false,
+    hasLady: false,
+    beenLadied: false,
     isFirstPlayer: false
   };
 
