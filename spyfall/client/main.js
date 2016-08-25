@@ -440,7 +440,7 @@ Template.registerHelper("displayBad", function(passPlayerID) {
   var result = "";
   players.forEach(function(player){
       if (player.isEvil == true&&player._id!=passPlayerID){
-        result=result+player.name+" is evil<br>";
+        result=result+player.name+" is evil\n";
       }
     });
   return result;
@@ -453,7 +453,7 @@ Template.registerHelper("helpMerlin", function() {
   var result = "";
   players.forEach(function(player){
       if (player.isEvil == true&&player.isMordred==false){
-        result=result+player.name+" is evil<br>";
+        result=result+player.name+" is evil\n";
       }
     });
   return result;

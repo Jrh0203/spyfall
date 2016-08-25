@@ -123,7 +123,7 @@
 
       {{else}}
       {{#if player.isMerlin}}
-      <div class="player-status player-status-spy">You are Merlin<br>{{helpMerlin}}</div>
+      <div class="player-status player-status-spy">You are Merlin<br><span class="pre">{{helpMerlin}}</span></div>
       {{else}}
       {{#if player.isPercival}}
       <div class="player-status player-status-spy">You are Percival<br>{{helpPercival}}</div>
@@ -136,6 +136,7 @@
       {{else}}
         <div class="player-status player-status-not-spy">You are Good</div>
 
+<!--
         <div class="current-location">
           <div class="current-location-header">
             {{_ "ui.the location" }}:
@@ -153,6 +154,7 @@
             {{_ player.role }}
           </div>
         </div>
+        -->
       {{/if}}
       {{/if}}
       {{/if}}
