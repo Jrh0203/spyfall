@@ -61,21 +61,117 @@ Meteor.publish('games', function(accessCode) {
 Meteor.publish('players', function(gameID) {
   return Players.find({"gameID": gameID});
 });
+
+function getConfig(numPlayers) {
+  var gameConfig = 
+    [
+    null,
+    { 
+      good: 1,
+      evil: 0
+    },
+    null,
+    null,
+    null,
+    {
+      good: 3,
+      evil: 2
+    },
+    { 
+      good: 4,
+      evil: 2
+    },
+    {
+      good: 4,
+      evil: 3
+    },
+    { 
+      good: 5,
+      evil: 3
+    },
+    { 
+      good: 6,
+      evil: 3
+    },
+    { 
+      good: 6,
+      evil: 4
+    }
+    ];
+
+    return gameConfig[numPlayers].good;
+}
+
+function getNumBad(numPlayers)
+{
+  return Math.ceil(numPlayers/3);
+}
+function getNumGood(numPlayers)
+{
+  return numPlayers-Math.ceil(numPlayers/3);
+}
+
 //****
 Games.find({"state": 'settingUp'}).observeChanges({
   added: function (id, game) {
     var location = getRandomLocation();
     var players = Players.find({gameID: id});
     //window.alert(players);
+    //console.log(players)
     var gameEndTime = moment().add(game.lengthInMinutes, 'minutes').valueOf();
+    console.log(getNumBad(players.count()));
+    var mordred = Math.floor(Math.random() * players.count());
+  if (players.count()>4)
+  {
+    var merlin = Math.floor(Math.random() * players.count());
+    while (merlin==mordred)
+    {
+      merlin = Math.floor(Math.random() * players.count());
+    }
+    var percival = Math.floor(Math.random() * players.count());
+    while (percival==mordred||percival==merlin)
+    {
+      percival = Math.floor(Math.random() * players.count());
+    }
+    var morgana = Math.floor(Math.random() * players.count());
+    while (morgana==mordred||morgana==merlin||morgana==percival)
+    {
+      morgana = Math.floor(Math.random() * players.count());
+    }
+    var normBad1 = Math.floor(Math.random() * players.count());
+    while (normBad1==mordred||normBad1==merlin||normBad1==percival||normBad1==morgana)
+    {
+      normBad1 = Math.floor(Math.random() * players.count());
+    }
+    var normBad2 = Math.floor(Math.random() * players.count());
+    while (normBad2==mordred||normBad2==merlin||normBad2==percival||normBad2==morgana)
+    {
+      normBad2 = Math.floor(Math.random() * players.count());
+    }
+  }
+  else
+  {
+    mordred = 0;
+    var merlin = 1;
+    var normBad1 = 2;
+  }
+    
 
-    var spyIndex = Math.floor(Math.random() * players.count());
     var firstPlayerIndex = Math.floor(Math.random() * players.count());
-
+    //console.log("lookhere");
+    //console.log(players);
     players.forEach(function(player, index){
       Players.update(player._id, {$set: {
-        isSpy: index === spyIndex,
-        isFirstPlayer: index === firstPlayerIndex
+        isMordred: index===mordred,
+        isMorgana: index===morgana,
+        isMerlin: index===merlin,
+        isPercival: index===percival,
+        isGoodLancelot: false,
+        isBadLancelot: false,
+        isEvil: index===mordred||index===morgana||index===normBad1||(index===normBad2&&players.count()==10),
+        isGood: !(index===mordred||index===morgana||index===normBad1||(index===normBad2&&players.count()==10)),
+        isSpy: false,
+        isFirstPlayer: index === firstPlayerIndex,
       }});
     });
 

@@ -433,6 +433,18 @@ Template.lobby.helpers({
   }
 });
 
+Template.registerHelper("displayBad", function() {
+  console.log("something should have printed");
+  var game = getCurrentGame();
+  var players = Players.find({'gameID': game._id}, {'sort': {'createdAt': 1}}).fetch();
+  var result = "";
+  players.forEach(function(player){
+      if (player.isEvil == true){
+        result=result+player.name+" is evil\n";
+      }
+    });
+});
+
 Template.lobby.events({
   'click .btn-leave': leaveGame,
   'click .btn-start': function () {
