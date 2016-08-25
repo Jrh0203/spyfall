@@ -433,16 +433,44 @@ Template.lobby.helpers({
   }
 });
 
-Template.registerHelper("displayBad", function() {
+Template.registerHelper("displayBad", function(passPlayerID) {
   console.log("something should have printed");
   var game = getCurrentGame();
   var players = Players.find({'gameID': game._id}, {'sort': {'createdAt': 1}}).fetch();
   var result = "";
   players.forEach(function(player){
-      if (player.isEvil == true){
-        result=result+player.name+" is evil\n";
+      if (player.isEvil == true&&player._id!=passPlayerID){
+        result=result+player.name+" is evil<br>";
       }
     });
+  return result;
+});
+
+Template.registerHelper("helpMerlin", function() {
+  console.log("something should have printed");
+  var game = getCurrentGame();
+  var players = Players.find({'gameID': game._id}, {'sort': {'createdAt': 1}}).fetch();
+  var result = "";
+  players.forEach(function(player){
+      if (player.isEvil == true&&player.isMordred==false){
+        result=result+player.name+" is evil<br>";
+      }
+    });
+  return result;
+});
+
+Template.registerHelper("helpPercival", function() {
+  console.log("something should have printed");
+  var game = getCurrentGame();
+  var players = Players.find({'gameID': game._id}, {'sort': {'createdAt': 1}}).fetch();
+  var result = "";
+  players.forEach(function(player){
+      if (player.isMorgana == true||player.isMerlin==true){
+        result=result+player.name+" and ";
+      }
+    });
+  result+=" are either Merlin or Morgana";
+  return result;
 });
 
 Template.lobby.events({

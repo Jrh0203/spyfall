@@ -119,23 +119,20 @@
         <div class="player-status player-status-spy">{{_ "ui.you are the spy" }}</div>
       {{else}}
       {{#if player.isMordred}}
-      <div class="player-status player-status-spy">You are Mordred: {{displayBad}}</div>
+      <div class="player-status player-status-spy">You are Mordred<br>{{displayBad player._id}}</div>
 
       {{else}}
       {{#if player.isMerlin}}
-      <div class="player-status player-status-spy">You are Merlin</div>
+      <div class="player-status player-status-spy">You are Merlin<br>{{helpMerlin}}</div>
       {{else}}
       {{#if player.isPercival}}
-      <div class="player-status player-status-spy">You are Percival</div>
+      <div class="player-status player-status-spy">You are Percival<br>{{helpPercival}}</div>
       {{else}}
       {{#if player.isMorgana}}
-      <div class="player-status player-status-spy">You are Morgana</div>
-      {{else}}
-      {{#if player.isMerlin}}
-      <div class="player-status player-status-spy">You are Merlin</div>
+      <div class="player-status player-status-spy">You are Morgana<br>{{displayBad player._id}}</div>
       {{else}}
       {{#if player.isEvil}}
-      <div class="player-status player-status-spy">You are Bad</div>
+      <div class="player-status player-status-spy">You are Bad<br>{{displayBad player._id}}</div>
       {{else}}
         <div class="player-status player-status-not-spy">You are Good</div>
 
@@ -156,7 +153,6 @@
             {{_ player.role }}
           </div>
         </div>
-      {{/if}}
       {{/if}}
       {{/if}}
       {{/if}}
