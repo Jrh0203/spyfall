@@ -126,13 +126,13 @@
       <div class="player-status player-status-spy">You are Merlin<br><span class="pre">{{helpMerlin}}</span></div>
       {{else}}
       {{#if player.isPercival}}
-      <div class="player-status player-status-spy">You are Percival<br>{{helpPercival}}</div>
+      <div class="player-status player-status-spy">You are Percival<br><span class="pre">{{helpPercival}}</span></div>
       {{else}}
       {{#if player.isMorgana}}
-      <div class="player-status player-status-spy">You are Morgana<br>{{displayBad player._id}}</div>
+      <div class="player-status player-status-spy">You are Morgana<br><span class="pre">{{displayBad player._id}}</span></div>
       {{else}}
       {{#if player.isEvil}}
-      <div class="player-status player-status-spy">You are Bad<br>{{displayBad player._id}}</div>
+      <div class="player-status player-status-spy">You are Bad<br><span class="pre">{{displayBad player._id}}</span></div>
       {{else}}
         <div class="player-status player-status-not-spy">You are Good</div>
 
